@@ -90,7 +90,6 @@
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>false</filtering>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
@@ -98,7 +97,6 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>false</filtering>
             </resource>
         </resources>
 
