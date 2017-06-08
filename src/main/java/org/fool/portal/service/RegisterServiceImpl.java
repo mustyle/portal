@@ -2,7 +2,7 @@ package org.fool.portal.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fool.portal.common.PortalResult;
-import org.fool.portal.dao.UserMapper;
+import org.fool.portal.mapper.UserMapper;
 import org.fool.portal.model.User;
 import org.fool.portal.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
