@@ -1,4 +1,6 @@
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,6 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.fool.portal.util.HttpClientPool;
 import org.fool.portal.util.JsonUtil;
 import org.junit.Test;
 
@@ -68,5 +71,32 @@ public class HttpClientTest {
 
         response.close();
         httpClient.close();
+    }
+
+    @Test
+    public void testGetPool() {
+        CloseableHttpClient httpClient = HttpClientPool.getHttpClient();
+
+        HttpResponse response = null;
+
+        try {
+            HttpGet httpGet = new HttpGet("http://www.baidu.com");
+            response = httpClient.execute(httpGet);
+
+            if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                EntityUtils.consume(response.getEntity());
+            } else {
+                String result = EntityUtils.toString(response.getEntity());
+                System.out.println(result);
+            }
+        } catch (Exception e) {
+            if(response != null) {
+                try {
+                    EntityUtils.consume(response.getEntity());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
 }
